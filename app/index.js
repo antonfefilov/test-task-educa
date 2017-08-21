@@ -1,14 +1,14 @@
 import React from 'react';
 import {render} from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { configureStore, history } from './store/configureStore';
+import { configureStore } from './store/configureStore';
 import Root from './containers/Root';
 
 const store = configureStore();
 
 render(
     <AppContainer>
-        <Root store={store} history={history} />
+        <Root store={store} />
     </AppContainer>,
     document.getElementById('root')
 );
@@ -21,7 +21,7 @@ if (module.hot) {
         const NewRoot = require('./containers/Root').default;
         render(
             <AppContainer>
-                <NewRoot store={newStore} history={newHistory} />
+                <NewRoot store={newStore} />
             </AppContainer>,
             document.getElementById('root')
         );
