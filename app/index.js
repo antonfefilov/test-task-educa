@@ -17,7 +17,6 @@ if (module.hot) {
     module.hot.accept('./containers/Root', () => {
         const newConfigureStore = require('./store/configureStore');
         const newStore = newConfigureStore.configureStore();
-        const newHistory = newConfigureStore.history;
         const NewRoot = require('./containers/Root').default;
         render(
             <AppContainer>

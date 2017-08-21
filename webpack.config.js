@@ -19,47 +19,49 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+          test: /\.js$/,
+          options: {
+            eslint: {
+              configFile: path.join(__dirname, '.eslintrc.json')
+            }
+          }
+        }),
         new HtmlWebpackPlugin({
           template: 'app/index.tpl.html',
           inject: 'body',
           filename: 'index.html'
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('development')
         })
     ],
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: false
-    },
     module: {
-        preLoaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'eslint'
-            }
-        ],
-        loaders: [
+        rules: [
             {
                 test: /\.js?$/,
                 exclude: /node_modules/,
-                loader: 'babel'
-            },
-            {
-                test: /\.json?$/,
-                loader: 'json'
+                use: [ 'babel-loader', 'eslint-loader' ]
             },
             {
                 test: /\.scss$/,
-                loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass'
+                use: [
+                  'style-loader',
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      localIdentName: '[sha512:hash:base32]-[name]-[local]',
+                      modules: true
+                    }
+                  },
+                  'sass-loader'
+                ]
             },
-            { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' }
+            { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, use: 'url-loader?limit=10000&mimetype=application/font-woff' },
+            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, use: 'file-loader' }
         ]
     }
 };
