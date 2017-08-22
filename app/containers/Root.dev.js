@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 
-// import App from '../components/App';
-import DevTools from './DevTools';
+import App from '../components/App';
+import DevTools from '../utils/DevTools';
 
 export default function Root({store}) {
     return (
         <Provider store={store}>
             <div>
+                <App />
                 <DevTools />
             </div>
         </Provider>
