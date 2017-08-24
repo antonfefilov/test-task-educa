@@ -1,1 +1,2 @@
-export const FILTER = 'FILTER';
+export const ADD_COMPANY = 'ADD_COMPANY';
+export const REMOVE_COMPANY = 'REMOVE_COMPANY';
