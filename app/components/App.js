@@ -22,9 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const companiesList = [
-  { symbol: 'AAPL', name: 'Apple Inc.', price: '$159.07' },
-  { symbol: 'GOOG', name: 'Alphabet Inc.', price: '$921.93' },
-  { symbol: 'MSFT', name: 'Microsoft Corporation', price: '$72.96' }
+  { symbol: 'AAPL', name: 'Apple Inc.', price: '' },
+  { symbol: 'GOOG', name: 'Alphabet Inc.', price: '' },
+  { symbol: 'MSFT', name: 'Microsoft Corporation', price: '' }
 ];
 
 class App extends React.Component {
