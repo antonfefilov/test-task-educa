@@ -1,8 +1,15 @@
 import * as types from './types';
 
-export function filterTable(filter) {
-    return {
-        type: types.FILTER,
-        filter
-    };
+export function addCompany(company) {
+  return {
+    type: types.ADD_COMPANY,
+    company
+  };
+}
+
+export function removeCompany(company) {
+  return {
+    type: types.REMOVE_COMPANY,
+    company
+  };
 }
