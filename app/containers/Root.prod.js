@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import App from '../components/App';
+import App from '../containers/App';
 
 export default function Root({store, history}) {
     return (

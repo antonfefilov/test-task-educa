@@ -7,7 +7,8 @@ import { footer } from '../styles/footer.scss';
 
 const mapStateToProps = (state) => {
   return {
-    companies: state.companies
+    companies: state.companies,
+    companiesBySymbol: state.companiesBySymbol
   };
 };
 
@@ -22,9 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const companiesList = [
-  { symbol: 'AAPL', name: 'Apple Inc.', price: '' },
-  { symbol: 'GOOG', name: 'Alphabet Inc.', price: '' },
-  { symbol: 'MSFT', name: 'Microsoft Corporation', price: '' }
+  { symbol: 'AAPL', name: 'Apple Inc.', price: '', isFetching: false },
+  { symbol: 'GOOG', name: 'Alphabet Inc.', price: '', isFetching: false },
+  { symbol: 'MSFT', name: 'Microsoft Corporation', price: '', isFetching: false }
 ];
 
 class App extends React.Component {
@@ -62,12 +63,12 @@ class App extends React.Component {
 
                 <tbody>
                   {
-                    this.props.companies.map((company, index) =>
+                    this.props.companies.map((companySymbol, index) =>
                       <tr key={index}>
-                        <td> {company.symbol} </td>
-                        <td> {company.name} </td>
-                        <td> {company.price} </td>
-                        <td> <a onClick={ () => this.props.onRemoveCompany(company) }>Remove</a> </td>
+                        <td> {this.props.companiesBySymbol[companySymbol].symbol} </td>
+                        <td> {this.props.companiesBySymbol[companySymbol].name} </td>
+                        <td> {this.props.companiesBySymbol[companySymbol].price} </td>
+                        <td> <a onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>Remove</a> </td>
                       </tr>
                     )
                   }
@@ -108,8 +109,9 @@ class App extends React.Component {
 
 App.propTypes = {
   companies: PropTypes.array,
+  companiesBySymbol: PropTypes.object,
   onAddCompany: PropTypes.func,
-  onRemoveCompany: PropTypes.func,
+  onRemoveCompany: PropTypes.func
 };
 
 export default connect(
