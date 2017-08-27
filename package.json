@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
   "dependencies": {
     "file-loader": "^0.11.2",
     "prop-types": "^15.5.10",
