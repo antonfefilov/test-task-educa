@@ -3,9 +3,10 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { configureStore } from './store/configureStore';
 import Root from './containers/Root';
-import { saveState } from './store/localStorage';
+import { loadState, saveState } from './store/localStorage';
 
-const store = configureStore();
+const persistedState = loadState();
+const store = configureStore(persistedState);
 
 store.subscribe(() => {
   saveState(store.getState());
