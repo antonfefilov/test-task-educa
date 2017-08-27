@@ -1,12 +1,15 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
 import DevTools from '../utils/DevTools';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
+import { loadState } from './localStorage';
 
-export function configureStore(initialState) {
+const persistedState = loadState();
+
+export function configureStore() {
   return createStore(
     rootReducer,
-    initialState,
+    persistedState,
     compose(
       applyMiddleware(thunk),
       DevTools.instrument()

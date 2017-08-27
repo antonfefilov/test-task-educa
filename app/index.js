@@ -3,8 +3,13 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { configureStore } from './store/configureStore';
 import Root from './containers/Root';
+import { saveState } from './store/localStorage';
 
 const store = configureStore();
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 render(
     <AppContainer>
