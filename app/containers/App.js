@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { addCompany, removeCompany } from '../actions';
+import { addCompany, removeCompany, updatePrice } from '../actions';
 import { connect } from 'react-redux';
 import { Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { footer } from '../styles/footer.scss';
@@ -19,6 +19,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onRemoveCompany(company) {
     dispatch(removeCompany(company));
+  },
+
+  onUpdatePrice(company) {
+    dispatch(updatePrice(company));
   },
 });
 
@@ -67,7 +71,10 @@ class App extends React.Component {
                       <tr key={index}>
                         <td> {this.props.companiesBySymbol[companySymbol].symbol} </td>
                         <td> {this.props.companiesBySymbol[companySymbol].name} </td>
-                        <td> {this.props.companiesBySymbol[companySymbol].price} </td>
+                        <td>
+                          {this.props.companiesBySymbol[companySymbol].price}
+                          <a onClick={ () => this.props.onUpdatePrice(this.props.companiesBySymbol[companySymbol]) }>Update</a>
+                        </td>
                         <td> <a onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>Remove</a> </td>
                       </tr>
                     )
@@ -111,7 +118,8 @@ App.propTypes = {
   companies: PropTypes.array,
   companiesBySymbol: PropTypes.object,
   onAddCompany: PropTypes.func,
-  onRemoveCompany: PropTypes.func
+  onRemoveCompany: PropTypes.func,
+  onUpdatePrice: PropTypes.func
 };
 
 export default connect(
