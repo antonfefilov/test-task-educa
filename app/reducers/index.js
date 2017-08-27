@@ -24,9 +24,20 @@ const companiesBySymbol = (state = {}, action) => {
       delete newState[action.company.symbol]
       return newState
     }
+    case types.UPDATE_PRICE:
+      return {
+        ...state,
+        [action.company.symbol]: updatePrice(state[action.company.symbol], action.newPrice)
+      };
     default:
       return state;
   }
+};
+
+const updatePrice = (state, newPrice) => {
+  return {
+      ...state, "price": newPrice
+  };
 };
 
 const rootReducer = combineReducers({

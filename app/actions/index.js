@@ -1,10 +1,22 @@
 import * as types from './types';
 
 export function addCompany(company) {
-  return {
-    type: types.ADD_COMPANY,
-    company
-  };
+  let newPrice = 100;
+
+  return (dispatch) => {
+    dispatch({
+      type: types.ADD_COMPANY,
+      company
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: types.UPDATE_PRICE,
+        company,
+        newPrice
+      })
+    }, 1000)
+  }
 }
 
 export function removeCompany(company) {
@@ -14,12 +26,13 @@ export function removeCompany(company) {
   };
 }
 
-// export function changePrice(company, price) {
-//   return {
-//     type: types.FETCH_PRICE_REQUEST,
-//     company
-//   };
-// }
+export function updatePrice(company, newPrice) {
+  return {
+    type: types.UPDATE_PRICE,
+    company,
+    newPrice
+  };
+}
 
 // {
 //   companies: ["APLE", "GOOG", "MSFT"],
