@@ -4,19 +4,16 @@ import { Provider } from 'react-redux';
 
 import App from '../containers/App';
 
-export default function Root({store, history}) {
-    return (
-        <Provider store={store}>
-            <div>
-                <ConnectedRouter history={history}>
-                    <Route path="/" component={App}/>
-                </ConnectedRouter>
-            </div>
-        </Provider>
-    );
+export default function Root({store}) {
+  return (
+    <Provider store={store}>
+      <div>
+        <App />
+      </div>
+    </Provider>
+  );
 }
 
 Root.propTypes = {
-    store: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+  store: PropTypes.object.isRequired
 };

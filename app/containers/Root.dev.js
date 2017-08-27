@@ -6,14 +6,14 @@ import App from '../containers/App';
 import DevTools from '../utils/DevTools';
 
 export default function Root({store}) {
-    return (
-        <Provider store={store}>
-            <div>
-                <App />
-                <DevTools />
-            </div>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <div>
+        <App />
+        <DevTools />
+      </div>
+    </Provider>
+  );
 }
 
 Root.propTypes = {
