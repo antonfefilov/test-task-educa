@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.production.config.js"
   },
   "dependencies": {
     "file-loader": "^0.11.2",

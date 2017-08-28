@@ -23,7 +23,7 @@ module.exports = {
         // webpack gives your modules and chunks ids to identify them. Webpack can vary the
         // distribution of the ids to get the smallest id length for often used ids with
         // this plugin
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
 
         // handles creating an index.html file and injecting assets. necessary because assets
         // change name because the hash part changes. We want hash name changes to bust cache
@@ -55,44 +55,31 @@ module.exports = {
         })
     ],
 
-    // ESLint options
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: true
-    },
-
     module: {
-        // Runs before loaders
-        preLoaders: [
+        rules: [
             {
-                test: /\.js$/,
+                test: /\.js?$/,
                 exclude: /node_modules/,
-                loader: 'eslint'
-            }
-        ],
-        // loaders handle the assets, like transforming sass to css or jsx to js.
-        loaders: [{
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loader: 'babel'
-        }, {
-            test: /\.json?$/,
-            loader: 'json'
-        }, {
-            test: /\.scss$/,
-            // we extract the styles into their own .css file instead of having
-            // them inside the js.
-            loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass')
-        }, {
-            test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/,
-            loader: 'url?limit=10000&mimetype=application/font-woff'
-        }, {
-            test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
-            loader: 'file'
-        }]
-    },
-    postcss: [
-        require('autoprefixer')
-    ]
+                use: [ 'babel-loader', 'eslint-loader' ]
+            },
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: [
+                    {
+                      loader: 'css-loader',
+                      options: {
+                        localIdentName: '[sha512:hash:base32]-[name]-[local]',
+                        modules: true
+                      }
+                    },
+                    'sass-loader'
+                  ]
+                })
+            },
+            { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, use: 'url-loader?limit=10000&mimetype=application/font-woff' },
+            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, use: 'file-loader' }
+        ]
+    }
 };
