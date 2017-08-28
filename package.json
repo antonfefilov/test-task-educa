@@ -1,7 +1,8 @@
 {
+  "homepage": "https://antonfefilov.github.io/test-task-educa/",
   "scripts": {
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "build": "webpack --config webpack.production.config.js"
   },
   "dependencies": {
