@@ -40,9 +40,41 @@ const updatePrice = (state, newPrice) => {
   };
 };
 
+const companiesList = [
+  { symbol: 'AAPL', name: 'Apple Inc.', price: '', isFetching: false },
+  { symbol: 'GOOG', name: 'Alphabet Inc.', price: '', isFetching: false },
+  { symbol: 'MSFT', name: 'Microsoft Corporation', price: '', isFetching: false }
+];
+
+const companiesToAdd = (state = companiesList, action) => {
+  switch (action.type) {
+    case types.ADD_COMPANY:
+      return state.filter((el) => (el !== action.company));
+    case types.REMOVE_COMPANY:
+      return [ ...state, action.company ];
+    default:
+      return state;
+  }
+};
+
+const toggleModal = (state = false, action) => {
+  switch (action.type) {
+    case types.OPEN_MODAL:
+      return true;
+    case types.CLOSE_MODAL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   companies,
-  companiesBySymbol
+  companiesBySymbol,
+  addCompany: combineReducers({
+    companies: companiesToAdd,
+    showModal: toggleModal
+  })
 });
 
 export default rootReducer;

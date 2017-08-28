@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { addCompany, removeCompany, updatePrice } from '../actions';
+import { removeCompany, updatePrice } from '../actions';
 import { connect } from 'react-redux';
-import { Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import AddCompany from './AddCompany';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,40 +12,16 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddCompany(company) {
-    dispatch(addCompany(company));
-  },
-
   onRemoveCompany(company) {
     dispatch(removeCompany(company));
   },
 
   onUpdatePrice(company) {
     dispatch(updatePrice(company));
-  },
+  }
 });
 
-const companiesList = [
-  { symbol: 'AAPL', name: 'Apple Inc.', price: '', isFetching: false },
-  { symbol: 'GOOG', name: 'Alphabet Inc.', price: '', isFetching: false },
-  { symbol: 'MSFT', name: 'Microsoft Corporation', price: '', isFetching: false }
-];
-
 class App extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = { showModal: false };
-  }
-
-  close() {
-    this.setState({ showModal: false });
-  }
-
-  open() {
-    this.setState({ showModal: true });
-  }
-
   render() {
     return (
       <div>
@@ -81,29 +57,9 @@ class App extends React.Component {
                 </tbody>
               </table>
 
-              <Button bsStyle="primary" bsSize="large" onClick={ () => this.open() }>
-                Add company
-              </Button>
-
-              <Modal show={this.state.showModal} onHide={ () => this.close() }>
-                <Modal.Header closeButton>
-                  <Modal.Title>Choose company</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <ListGroup>
-                    {
-                      companiesList.map( (company, index) =>
-                        <ListGroupItem key={index} onClick={ () => this.props.onAddCompany(company) }> {company.name} </ListGroupItem>
-                      )
-                    }
-                  </ListGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button onClick={ () => this.close() }>Close</Button>
-                </Modal.Footer>
-              </Modal>
-              </div>
+              <AddCompany />
             </div>
+          </div>
         </div>
       </div>
     )
