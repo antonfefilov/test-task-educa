@@ -3,7 +3,6 @@ import React from 'react';
 import { addCompany, removeCompany, updatePrice } from '../actions';
 import { connect } from 'react-redux';
 import { Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { footer } from '../styles/footer.scss';
 
 const mapStateToProps = (state) => {
   return {
@@ -105,9 +104,6 @@ class App extends React.Component {
               </Modal>
               </div>
             </div>
-
-          <footer className={footer}>
-          </footer>
         </div>
       </div>
     )
