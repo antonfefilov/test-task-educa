@@ -30,7 +30,7 @@ class AddCompany extends React.Component {
   render() {
     return (
       <div>
-        <Button bsStyle="primary" bsSize="large" onClick={ () => this.props.onOpenModal() }>
+        <Button bsStyle="primary" bsSize="large" onClick={ () => this.props.onOpenModal() } disabled={ this.props.companiesList.length == 0 ? true : false }>
           Add company
         </Button>
 
@@ -39,13 +39,20 @@ class AddCompany extends React.Component {
             <Modal.Title>Choose company</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ListGroup>
-              {
-                this.props.companiesList.map( (company, index) =>
-                  <ListGroupItem key={index} onClick={ () => this.props.onAddCompany(company) }> {company.name} </ListGroupItem>
-                )
-              }
-            </ListGroup>
+            {
+              this.props.companiesList.length == 0 ?
+                <div className="text-center">
+                  <span>No companies to add</span>
+                </div>
+              :
+                <ListGroup>
+                  {
+                    this.props.companiesList.map( (company, index) =>
+                      <ListGroupItem key={index} onClick={ () => this.props.onAddCompany(company) }> {company.name} </ListGroupItem>
+                    )
+                  }
+                </ListGroup>
+            }
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={ () => this.props.onCloseModal() }>Close</Button>
