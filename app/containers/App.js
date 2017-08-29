@@ -52,7 +52,12 @@ class App extends React.Component {
                           <td> {this.props.companiesBySymbol[companySymbol].symbol} </td>
                           <td> {this.props.companiesBySymbol[companySymbol].name} </td>
                           <td>
-                             {this.props.companiesBySymbol[companySymbol].price}
+                            {
+                              this.props.companiesBySymbol[companySymbol].isFetching ?
+                                <i className="fa fa-spinner fa-spin fa-lg" aria-hidden="true"></i>
+                              :
+                                this.props.companiesBySymbol[companySymbol].price
+                            }
                           </td>
                           <td>
                             <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>

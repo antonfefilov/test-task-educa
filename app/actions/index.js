@@ -18,10 +18,26 @@ export function removeCompany(company) {
   };
 }
 
+export function updatePriceStart(company) {
+  return {
+    type: types.UPDATE_PRICE_START,
+    company
+  };
+}
+
+export function updatePriceError(company) {
+  return {
+    type: types.UPDATE_PRICE_ERROR,
+    company
+  };
+}
+
 export function updatePrice(company) {
   let fetchUrl = `https://query.yahooapis.com/v1/public/yql?q=env "store://datatables.org/alltableswithkeys"; select * from yahoo.finance.quotes where symbol in ("${company.symbol}")&format=json`;
 
   return (dispatch) => {
+    dispatch(updatePriceStart(company));
+
     return fetch(fetchUrl)
       .then(
         response => response.json(),
@@ -30,6 +46,9 @@ export function updatePrice(company) {
         /* eslint-enable no-console */
       )
       .then(json => {
+        if (json.error)
+          return dispatch(updatePrice(company));
+
         let newPrice = json.query.results.quote.LastTradePriceOnly
 
         dispatch({

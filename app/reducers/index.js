@@ -24,6 +24,16 @@ const companiesBySymbol = (state = {}, action) => {
       delete newState[action.company.symbol]
       return newState
     }
+    case types.UPDATE_PRICE_START:
+      return {
+        ...state,
+        [action.company.symbol]: updatePriceStart(state[action.company.symbol])
+      };
+    case types.UPDATE_PRICE_ERROR:
+      return {
+        ...state,
+        [action.company.symbol]: updatePriceError(state[action.company.symbol])
+      };
     case types.UPDATE_PRICE:
       return {
         ...state,
@@ -34,9 +44,21 @@ const companiesBySymbol = (state = {}, action) => {
   }
 };
 
+const updatePriceStart = (state) => {
+  return {
+      ...state, isFetching: true
+  };
+};
+
+const updatePriceError = (state) => {
+  return {
+      ...state, isFetching: false
+  };
+};
+
 const updatePrice = (state, newPrice) => {
   return {
-      ...state, "price": newPrice
+      ...state, "price": newPrice, isFetching: false
   };
 };
 
