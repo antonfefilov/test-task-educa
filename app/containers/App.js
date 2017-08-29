@@ -32,38 +32,42 @@ class App extends React.Component {
                 <h1>Public companies stocks</h1>
               </header>
 
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Company name</th>
-                    <th>Price</th>
-                    <th />
-                  </tr>
-                </thead>
+              {
+                this.props.companies.length > 0 &&
 
-                <tbody>
-                  {
-                    this.props.companies.map((companySymbol, index) =>
-                      <tr key={index}>
-                        <td> {this.props.companiesBySymbol[companySymbol].symbol} </td>
-                        <td> {this.props.companiesBySymbol[companySymbol].name} </td>
-                        <td>
-                           {this.props.companiesBySymbol[companySymbol].price}
-                        </td>
-                        <td>
-                          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>
-                            <i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                          </a>
-                          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onUpdatePrice(this.props.companiesBySymbol[companySymbol]) }>
-                            <i className="fa fa-refresh fa-lg" aria-hidden="true"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    )
-                  }
-                </tbody>
-              </table>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Symbol</th>
+                      <th>Company name</th>
+                      <th>Price</th>
+                      <th />
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {
+                      this.props.companies.map((companySymbol, index) =>
+                        <tr key={index}>
+                          <td> {this.props.companiesBySymbol[companySymbol].symbol} </td>
+                          <td> {this.props.companiesBySymbol[companySymbol].name} </td>
+                          <td>
+                             {this.props.companiesBySymbol[companySymbol].price}
+                          </td>
+                          <td>
+                            <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>
+                              <i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                            </a>
+                            <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onUpdatePrice(this.props.companiesBySymbol[companySymbol]) }>
+                              <i className="fa fa-refresh fa-lg" aria-hidden="true"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      )
+                    }
+                  </tbody>
+                </table>
+              }
 
               <AddCompany />
             </div>
