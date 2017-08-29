@@ -30,13 +30,18 @@ class AddCompany extends React.Component {
   render() {
     return (
       <div>
-        <Button bsStyle="primary" bsSize="large" onClick={ () => this.props.onOpenModal() } disabled={ this.props.companiesList.length == 0 ? true : false }>
-          Add company
-        </Button>
+        <div className="text-center my-5">
+          <Button bsStyle="primary" bsSize="large" onClick={ () => this.props.onOpenModal() } disabled={ this.props.companiesList.length == 0 ? true : false }>
+            Add company
+          </Button>
+        </div>
 
-        <Modal show={this.props.showModal} onHide={ () => this.props.onCloseModal() }>
-          <Modal.Header closeButton>
-            <Modal.Title>Choose company</Modal.Title>
+        <Modal bsClass="show modal" show={this.props.showModal} onHide={ () => this.props.onCloseModal() }>
+          <Modal.Header>
+            <Modal.Title componentClass="h5">Choose company</Modal.Title>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={ () => this.props.onCloseModal() }>
+              <span aria-hidden="true">&times;</span>
+            </button>
           </Modal.Header>
           <Modal.Body>
             {
@@ -55,7 +60,7 @@ class AddCompany extends React.Component {
             }
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={ () => this.props.onCloseModal() }>Close</Button>
+            <Button bsStyle="secondary" onClick={ () => this.props.onCloseModal() }>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>

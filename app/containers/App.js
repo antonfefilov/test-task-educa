@@ -28,7 +28,9 @@ class App extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1>Companies list</h1>
+              <header className="my-5 text-center">
+                <h1>Public companies stocks</h1>
+              </header>
 
               <table className="table">
                 <thead>
@@ -47,10 +49,16 @@ class App extends React.Component {
                         <td> {this.props.companiesBySymbol[companySymbol].symbol} </td>
                         <td> {this.props.companiesBySymbol[companySymbol].name} </td>
                         <td>
-                          {this.props.companiesBySymbol[companySymbol].price}
-                          <a onClick={ () => this.props.onUpdatePrice(this.props.companiesBySymbol[companySymbol]) }>Update</a>
+                           {this.props.companiesBySymbol[companySymbol].price}
                         </td>
-                        <td> <a onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>Remove</a> </td>
+                        <td>
+                          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[companySymbol]) }>
+                            <i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onUpdatePrice(this.props.companiesBySymbol[companySymbol]) }>
+                            <i className="fa fa-refresh fa-lg" aria-hidden="true"></i>
+                          </a>
+                        </td>
                       </tr>
                     )
                   }
