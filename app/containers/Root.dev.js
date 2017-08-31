@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import App from '../containers/App';
+import App from '../components/App';
 import DevTools from '../utils/DevTools';
 
 export default function Root({store}) {
