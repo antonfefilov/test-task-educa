@@ -21,23 +21,28 @@ const mapDispatchToProps = (dispatch) => ({
 
 class CompaniesRow extends React.Component {
   render() {
+    const companies = this.props.companiesBySymbol;
+    const symbol = this.props.companySymbol;
+
+    const company = companies[symbol];
+
     return (
       <tr>
-        <td> {this.props.companiesBySymbol[this.props.companySymbol].symbol} </td>
-        <td> {this.props.companiesBySymbol[this.props.companySymbol].name} </td>
+        <td> {company.symbol} </td>
+        <td> {company.name} </td>
         <td>
           {
-            this.props.companiesBySymbol[this.props.companySymbol].isFetching ?
+            company.isFetching ?
               <i className="fa fa-spinner fa-spin fa-lg" aria-hidden="true"></i>
             :
-              this.props.companiesBySymbol[this.props.companySymbol].price
+              company.price
           }
         </td>
         <td>
-          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onRemoveCompany(this.props.companiesBySymbol[this.props.companySymbol]) }>
+          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onRemoveCompany(company) }>
             <i className="fa fa-trash-o fa-lg" aria-hidden="true"></i>
           </a>
-          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onUpdatePrice(this.props.companiesBySymbol[this.props.companySymbol]) }>
+          <a className="mr-3 float-right" href="javascript: void(0);" onClick={ () => this.props.onUpdatePrice(company) }>
             <i className="fa fa-refresh fa-lg" aria-hidden="true"></i>
           </a>
         </td>
@@ -47,6 +52,7 @@ class CompaniesRow extends React.Component {
 }
 
 CompaniesRow.propTypes = {
+  company: PropTypes.object,
   companiesBySymbol: PropTypes.object,
   companySymbol: PropTypes.string,
   onRemoveCompany: PropTypes.func,

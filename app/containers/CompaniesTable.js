@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+
 import CompaniesRow from './CompaniesRow'
 
 const mapStateToProps = (state) => {
   return {
-    companies: state.companies,
+    companies: state.companies
   };
 };
 
@@ -37,7 +38,7 @@ class CompaniesTable extends React.Component {
 }
 
 CompaniesTable.propTypes = {
-  companies: PropTypes.array,
+  companies: PropTypes.array
 };
 
 export default connect(
