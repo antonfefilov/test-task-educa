@@ -52,7 +52,6 @@ class CompaniesRow extends React.Component {
 }
 
 CompaniesRow.propTypes = {
-  company: PropTypes.object,
   companiesBySymbol: PropTypes.object,
   companySymbol: PropTypes.string,
   onRemoveCompany: PropTypes.func,
